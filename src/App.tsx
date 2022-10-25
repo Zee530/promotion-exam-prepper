@@ -7,9 +7,9 @@ import Landing from './components/Landing';
 function App() {
   return (
     <ChakraProvider>
-      {/* <Navbar />
-      <Home /> */}
-      <Landing />
+      <Navbar />
+      {/* <Home /> */}
+      {/* <Landing /> */}
     </ChakraProvider>
   )
 }

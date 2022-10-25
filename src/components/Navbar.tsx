@@ -8,13 +8,13 @@ import {
   Button
 } from '@chakra-ui/react'
 import { Image } from '@chakra-ui/react'
-import logo from './img/hat_logo.png'
+import logo from './img/owl.png'
 
 function Navbar() {
   return (
-    <Box bg='#066204' w='100%' color='white' p={4} display='flex'>
+    <Box bg='lightblue' w='100%' color='white' p={4} display='flex'>
       <Box w='80%' display='flex'>
-        <Image src={logo} alt='logo_1' ml={12} width={8} height={8}/>
+        <Image src={logo} alt='logo_1' ml={12} width={10} height={10}/>
         <Box pl={5} fontSize={20} fontWeight='bolder'>PROMOTOTION EXAM PREPPER</Box>
       </Box>
       <Box w='20%'>
