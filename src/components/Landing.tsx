@@ -1,13 +1,46 @@
-import { Box, Center, Image, Button,  FormControl, FormLabel, Input, NumberInput,
-    NumberInputField,
-    NumberInputStepper,
-    NumberIncrementStepper,
-    NumberDecrementStepper,
+import { Box, Center, Image, Button,  FormControl, FormLabel, Input,
     Select, Stack, InputGroup,InputLeftAddon } from '@chakra-ui/react'
+import { useFormik } from 'formik';
+ import * as Yup from 'yup';
 import logo from './img/main_cover.jpg'
 
 
 function Landing() {
+    const register = useFormik({
+        initialValues: {
+            staffid: '',
+            firstName: '',
+            lastName: '',
+            department: '',
+            rank: '',
+            phone:''
+        },
+        validationSchema: Yup.object({
+            staffid: Yup.string()
+                .min(5, 'Staff ID requires 5 characters')
+                .max(5, 'Staff ID requires 5 characters')
+                .required('Required'),
+            firstName: Yup.string()
+                .required('Required'),
+            lastName: Yup.string()
+                .required('Required'),
+            department: Yup.string()
+                .oneOf(['aprd','audit','claims','corporate','enforcement','finance','admin',
+                        'hse','ict','informal','inspection','legal','servicom'])
+                .required('Required'),
+            rank: Yup.number()
+                .oneOf([0,1,2,3,4,5,6,7,8,9])
+                .required('Required'),
+            phone: Yup.string()
+                .min(10, 'Enter a valid phone number')
+                .max(10, 'Enter a valid phone number')
+                .required('Required')
+        }),
+        onSubmit: values => {
+          alert(JSON.stringify(values, null, 2));
+        },
+      });
+
   return (
     <Box display='flex'>
         <Box w='60%'>
@@ -18,22 +51,32 @@ function Landing() {
                 PROMOTION EXAM PREPPER
             </Center>
             <Center>
-                <FormControl p={3}>
+                <FormControl p={3} w='90%'>
+                <form onSubmit={register.handleSubmit}>
                     <Stack spacing={3}>
                         <FormLabel color='white'>Staff ID</FormLabel>
                         <InputGroup>
                         <InputLeftAddon children='Aa/'/>
-                            <Input type='number' bg='white'/>
+                            <Input id='staffid' type='number' bg='white' {...register.getFieldProps('staffid')}/>
                         </InputGroup>
+                        {register.touched.staffid && register.errors.staffid ? (
+                            <Box color='red' fontStyle='italic' fontSize={12}>{register.errors.staffid}</Box>
+                        ) : null}
 
                     <FormLabel color='white'>First Name</FormLabel>
-                    <Input type='text' bg='white'/>
+                    <Input id='firstName' type='text' bg='white' {...register.getFieldProps('firstName')}/>
+                    {register.touched.firstName && register.errors.firstName ? (
+                            <Box color='red' fontStyle='italic' fontSize={12}>{register.errors.firstName}</Box>
+                        ) : null}
 
                     <FormLabel color='white'>Last Name</FormLabel>
-                    <Input type='text' bg='white'/>
+                    <Input id='lastName' type='text' bg='white' {...register.getFieldProps('lastName')}/>
+                    {register.touched.lastName && register.errors.lastName ? (
+                            <Box color='red' fontStyle='italic' fontSize={12}>{register.errors.lastName}</Box>
+                        ) : null}
 
                     <FormLabel color='white'>Department</FormLabel>
-                    <Select placeholder='Select option' bg='white'>
+                    <Select id='department' placeholder='Select option' bg='white' {...register.getFieldProps('department')}>
                         <option value='aprd'>APRD</option>
                         <option value='audit'>Audit</option>
                         <option value='claims'>Claims and Compensation</option>
@@ -48,9 +91,12 @@ function Landing() {
                         <option value='legal'>Legal</option>
                         <option value='servicom'>Servicom</option>
                     </Select>
+                    {register.touched.department && register.errors.department ? (
+                            <Box color='red' fontStyle='italic' fontSize={12}>{register.errors.department}</Box>
+                        ) : null}
 
                     <FormLabel color='white'>Rank</FormLabel>
-                    <Select placeholder='Select option' bg='white'>
+                    <Select id='rank' placeholder='Select option' bg='white' {...register.getFieldProps('rank')}>
                         <option value={9}>General Manager</option>
                         <option value={8}>Deputy General Manager</option>
                         <option value={7}>Assistant General Manager</option>
@@ -62,18 +108,25 @@ function Landing() {
                         <option value={1}>Officer 1</option>
                         <option value={0}>Officer 2</option>
                     </Select>
+                    {register.touched.rank && register.errors.rank ? (
+                            <Box color='red' fontStyle='italic' fontSize={12}>{register.errors.rank}</Box>
+                        ) : null}
 
                     <FormLabel color='white'>Phone Number</FormLabel>
                         <InputGroup>
                         <InputLeftAddon children='+234' />
-                        <Input type='tel' bg='white' />
+                        <Input type='tel' bg='white' id='phone' {...register.getFieldProps('phone')} />
                         </InputGroup>
+                        {register.touched.phone && register.errors.phone ? (
+                            <Box color='red' fontStyle='italic' fontSize={12}>{register.errors.phone}</Box>
+                        ) : null}
                     </Stack>
                     <Center>
                         <Button color='lightblue' variant='solid' bg='white' mt={10} width={60} height={50}>
                             START
                         </Button>
                     </Center>
+                    </form>
                 </FormControl>
             </Center> 
         </Box>
