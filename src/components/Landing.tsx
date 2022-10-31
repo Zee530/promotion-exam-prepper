@@ -1,7 +1,8 @@
 import { Box, Center, Image, Button,  FormControl, FormLabel, Input,
-    Select, Stack, InputGroup,InputLeftAddon } from '@chakra-ui/react'
+    Select, Stack, InputGroup,InputLeftAddon, ResponsiveValue } from '@chakra-ui/react'
 import { useFormik } from 'formik';
  import * as Yup from 'yup';
+import { string } from 'yup/lib/locale';
 import logo from './img/main_cover.jpg'
 
 
@@ -37,14 +38,26 @@ function Landing() {
                 .required('Required')
         }),
         onSubmit: values => {
-          alert(JSON.stringify(values, null, 2));
+        //   alert(JSON.stringify(values, null, 2));
+        console.log(values)
         },
       });
+
+    //   const heightControl = ():any => {
+    //     let newHeight: any
+    //     if (register.errors) {
+    //          newHeight = '120vh'}
+    //         else {
+    //             newHeight = '100vh'
+    //         }
+    //     return newHeight
+        
+    
 
   return (
     <Box display='flex'>
         <Box w='60%'>
-            <Image src={logo} alt='main' height='100vh'/>
+            <Image src={logo} alt='main' height='120vh'/>
         </Box>
         <Box w='40%' bg='lightblue'>
            <Center mt={4} mb={4} fontWeight='bolder' color='white' fontSize={28}>
@@ -60,7 +73,7 @@ function Landing() {
                             <Input id='staffid' type='number' bg='white' {...register.getFieldProps('staffid')}/>
                         </InputGroup>
                         {register.touched.staffid && register.errors.staffid ? (
-                            <Box color='red' fontStyle='italic' fontSize={12}>{register.errors.staffid}</Box>
+                            <Box display='flex' alignItems='baseline' color='red' fontStyle='italic' fontSize={12}>{register.errors.staffid}</Box>
                         ) : null}
 
                     <FormLabel color='white'>First Name</FormLabel>
@@ -122,7 +135,7 @@ function Landing() {
                         ) : null}
                     </Stack>
                     <Center>
-                        <Button color='lightblue' variant='solid' bg='white' mt={10} width={60} height={50}>
+                        <Button type='submit' color='lightblue' variant='solid' bg='white' mt={10} width={60} height={50}>
                             START
                         </Button>
                     </Center>

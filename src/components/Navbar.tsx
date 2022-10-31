@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react'
+import { Box, Img } from '@chakra-ui/react'
 import {
   List,
   ListItem,
@@ -9,6 +9,9 @@ import {
 } from '@chakra-ui/react'
 import { Image } from '@chakra-ui/react'
 import logo from './img/owl.png'
+import home from './img/home.svg'
+import info from './img/info.svg'
+import github from './img/github.svg'
 
 function Navbar() {
   return (
@@ -18,10 +21,10 @@ function Navbar() {
         <Box pl={5} fontSize={20} fontWeight='bolder'>PROMOTOTION EXAM PREPPER</Box>
       </Box>
       <Box w='20%'>
-        <List display='flex' justifyContent='space-evenly'>
-          <ListItem><Button bg='inherit'>Home</Button></ListItem>
-          <ListItem><Button bg='inherit'>About</Button></ListItem>
-          <ListItem><Button bg='inherit'>GitHub</Button></ListItem>
+        <List display='flex' justifyContent='flex-end'>
+          <ListItem><Button bg='inherit'><Img src={home} alt='github' boxSize={8}/></Button></ListItem>
+          <ListItem><Button bg='inherit'><Img src={info} alt='github' boxSize={8}/></Button></ListItem>
+          <ListItem><Button bg='inherit'><Img src={github} alt='github' boxSize={8}/></Button></ListItem>
         </List>
       </Box>
     </Box>
