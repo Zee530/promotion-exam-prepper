@@ -4,9 +4,11 @@ import { useFormik } from 'formik';
  import * as Yup from 'yup';
 import { string } from 'yup/lib/locale';
 import logo from './img/main_cover.jpg'
+import { useNavigate } from 'react-router-dom'
 
 
 function Landing() {
+    let navigate = useNavigate()
     const register = useFormik({
         initialValues: {
             staffid: '',
@@ -18,7 +20,7 @@ function Landing() {
         },
         validationSchema: Yup.object({
             staffid: Yup.string()
-                .min(5, 'Staff ID requires 5 characters')
+                .min(4, 'Staff ID requires 5 characters')
                 .max(5, 'Staff ID requires 5 characters')
                 .required('Required'),
             firstName: Yup.string()
@@ -40,6 +42,7 @@ function Landing() {
         onSubmit: values => {
         //   alert(JSON.stringify(values, null, 2));
         console.log(values)
+        navigate('exam')
         },
       });
 
@@ -60,7 +63,7 @@ function Landing() {
             <Image src={logo} alt='main' height='120vh'/>
         </Box>
         <Box w='40%' bg='lightblue'>
-           <Center mt={4} mb={4} fontWeight='bolder' color='white' fontSize={28}>
+           <Center mt={4} mb={4} fontFamily='ultra' color='white' fontSize={28}>
                 PROMOTION EXAM PREPPER
             </Center>
             <Center>
@@ -135,9 +138,11 @@ function Landing() {
                         ) : null}
                     </Stack>
                     <Center>
-                        <Button type='submit' color='lightblue' variant='solid' bg='white' mt={10} width={60} height={50}>
-                            START
-                        </Button>
+                        {/* <Link to='/exam'> */}
+                            <Button type='submit' color='lightblue' variant='solid' bg='white' mt={10} width={60} height={50}>
+                                START
+                            </Button>
+                        {/* </Link> */}
                     </Center>
                     </form>
                 </FormControl>
