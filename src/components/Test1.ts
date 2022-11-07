@@ -8,19 +8,23 @@ const test1 = [{
     question:'What year did Nigeria gain Independence?',
     option1: {
         val:'0',
-        text:'1959'
+        text:'1959',
+        answer: 0
     },
     option2: {
         val:'1',
-        text:'1960'
+        text:'1960',
+        answer: 1
     },
     option3: {
         val:'2',
-        text:'1961'
+        text:'1961',
+        answer: 0
     },
     option4: {
         val:'3',
-        text:'1962'
+        text:'1962',
+        answer: 0
     }
 },
 {
@@ -28,19 +32,23 @@ const test1 = [{
     question:'Who is the current Head of State?',
     option1: {
         val:'1',
-        text:'Muhammadu Buhari'
+        text:'Muhammadu Buhari',
+        answer: 1
     },
     option2: {
         val:'0',
-        text:'Bola Tinubu'
+        text:'Bola Tinubu',
+        answer: 0
     },
     option3: {
         val:'2',
-        text:'Rabiu Kwankwaso'
+        text:'Rabiu Kwankwaso',
+        answer: 0
     },
     option4: {
         val:'3',
-        text:'Atiku Abubakar'
+        text:'Atiku Abubakar',
+        answer: 0
     }
 },
 {
@@ -48,19 +56,23 @@ const test1 = [{
     question:"What is the country's main source of income",
     option1: {
         val:'0',
-        text:'Cocoa'
+        text:'Cocoa',
+        answer: 0
     },
     option2: {
         val:'2',
-        text:'Gold'
+        text:'Gold',
+        answer: 0
     },
     option3: {
         val:'1',
-        text:'Crude Oil'
+        text:'Crude Oil',
+        answer: 1
     },
     option4: {
         val:'3',
-        text:'Plutomium'
+        text:'Plutomium',
+        answer: 0
     }
 },
 ]
