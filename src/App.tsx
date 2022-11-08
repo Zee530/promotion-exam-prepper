@@ -10,6 +10,7 @@ import { Routes, Route } from 'react-router-dom'
 
 function App() {
   return (
+    <React.StrictMode>
     <ChakraProvider theme={theme}>
       <Routes>
         <Route path='/' element={<Landing />}/>
@@ -17,6 +18,7 @@ function App() {
         <Route path='/exam' element={<Exam />}/>
       </Routes>
     </ChakraProvider>
+    </React.StrictMode>
   )
 }
 
