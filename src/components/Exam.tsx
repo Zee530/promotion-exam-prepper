@@ -1,5 +1,5 @@
 import { Box, Button, FormControl, FormLabel, Radio, RadioGroup, Stack } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import Navbar from './Navbar'
 import test1 from './Test1'
 // import { Formik, Field, Form } from 'formik';
@@ -13,17 +13,17 @@ function Exam() {
 
     const [radVal, setRadVal] = useState('')
     const [answer, setAnswer] = useState(0)
+    const radioRef: any = useRef()
 
-    function result() {
-        if (radVal === '1') {
-            setAnswer(answer + 1)
-            console.log(answer)
-            window.alert(`Correct, Your score is ${answer}`)
-        } else {
-            window.alert('Incorrect answer')
-        } 
-        
-
+    function result(e:any) {
+        e.preventDefault()
+        // console.log(radioRef.current.checked)
+        // if (radioRef.current.value == '1') {
+        //     setAnswer(answer + 1)
+        //     alert(`Correct, your score is ${answer}`)
+        // } else {
+        //     alert('Incorrect answer')
+        // }
     }
   return (
     <>
@@ -32,27 +32,25 @@ function Exam() {
             <Box w='10%'/>
             <Box w='80%' marginTop={10}>
             <FormControl>
-                <form>
+                <form onSubmit={result}>
                         {test1.map((item, i) => (
                     <Stack mb={4}>
                         <Box borderWidth='2px' borderRadius='lg' mb={5}>
                             <Box p={1} fontStyle='italic' fontFamily='ultra' fontSize={20} color='lightblue'>Q{item.index}</Box>
                             <Box p={5}>
-
                                 <FormLabel>{item.question}</FormLabel>
                                 <RadioGroup onChange={setRadVal}>
                                     <Stack direction='column' marginBottom={4}>
-                                        <Radio value={item.option1.val} name={item.index}>{item.option1.text}</Radio>
-                                        <Radio value={item.option2.val} name={item.index}>{item.option2.text}</Radio>
-                                        <Radio value={item.option3.val} name={item.index}>{item.option3.text}</Radio>
-                                        <Radio value={item.option4.val} name={item.index}>{item.option4.text}</Radio>
+                                        {item.options.map((item, i) => (
+                                            <Radio value={item.value}>{item.answer}</Radio>
+                                         ))} 
                                     </Stack>
                                 </RadioGroup>
                             </Box>
                         </Box>
                     </Stack>
                         ))}
-                    <Button onClick={result} color='white' variant='solid' bg='lightblue'>SUBMIT</Button>
+                    <Button type='submit' color='white' variant='solid' bg='lightblue'>SUBMIT</Button>
                     {JSON.stringify(answer)}
                 </form>
             </FormControl>

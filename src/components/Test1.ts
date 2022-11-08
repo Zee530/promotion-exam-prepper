@@ -6,74 +6,32 @@
 const test1 = [{
     index: '1',
     question:'What year did Nigeria gain Independence?',
-    option1: {
-        val:'0',
-        text:'1959',
-        answer: 0
-    },
-    option2: {
-        val:'1',
-        text:'1960',
-        answer: 1
-    },
-    option3: {
-        val:'2',
-        text:'1961',
-        answer: 0
-    },
-    option4: {
-        val:'3',
-        text:'1962',
-        answer: 0
-    }
+    options: [
+        { answer:'1959', isCorrect: false, value: '0' },
+        { answer:'1960', isCorrect: true, value: '1' },
+        { answer:'1961', isCorrect: false, value: '2' },
+        { answer:'1962', isCorrect: false, value: '3' }        
+    ]
 },
 {
     index: '2',
     question:'Who is the current Head of State?',
-    option1: {
-        val:'1',
-        text:'Muhammadu Buhari',
-        answer: 1
-    },
-    option2: {
-        val:'0',
-        text:'Bola Tinubu',
-        answer: 0
-    },
-    option3: {
-        val:'2',
-        text:'Rabiu Kwankwaso',
-        answer: 0
-    },
-    option4: {
-        val:'3',
-        text:'Atiku Abubakar',
-        answer: 0
-    }
+    options: [
+        { answer:'Muhammadu Buhari', isCorrect: true, value: '0' },
+        { answer:'Bola Tinubu', isCorrect: false, value: '1' },
+        { answer:'Rabiu Kwankwaso', isCorrect: false, value: '2' },
+        { answer:'Atiku Abubakar', isCorrect: false, value: '3' }        
+    ]
 },
 {
     index: '3',
     question:"What is the country's main source of income",
-    option1: {
-        val:'0',
-        text:'Cocoa',
-        answer: 0
-    },
-    option2: {
-        val:'2',
-        text:'Gold',
-        answer: 0
-    },
-    option3: {
-        val:'1',
-        text:'Crude Oil',
-        answer: 1
-    },
-    option4: {
-        val:'3',
-        text:'Plutomium',
-        answer: 0
-    }
+    options: [
+        { answer:'Cocoa', isCorrect: false, value: '0' },
+        { answer:'Gold', isCorrect: false, value: '1' },
+        { answer:'Crude Oil', isCorrect: true, value: '2' },
+        { answer:'Plutomium', isCorrect: false, value: '3' }        
+    ]
 },
 ]
 
