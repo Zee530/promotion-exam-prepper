@@ -15,15 +15,19 @@ function Exam() {
 
     function result(e:any) {
       e.preventDefault()
-      for (let i = 0; i < test1.length; i++) {
-        if (radVal === test1[i].correct) {
-          alert('Correct answer')
-          setScore(score + 1)
-        } else {
-          alert('Wrong answer')
-        }
-        console.log(radVal)
-        console.log(test1[i].correct)
+      if (radVal) {
+          for (let i = 0; i < test1.length; i++) {
+            if (radVal === test1[i].correct) {
+              alert('Correct answer')
+              setScore(score + 1)
+            } else {
+              alert('Wrong answer')
+            }
+            console.log(radVal)
+            console.log(test1[i].correct)
+          }
+      } else {
+        alert('Select an option')
       }
     }
   return (
