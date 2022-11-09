@@ -1,13 +1,19 @@
 import { Alert, Box, Button, FormControl, FormLabel, Radio, RadioGroup, Stack } from '@chakra-ui/react'
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import Navbar from './Navbar'
 import test1 from './Test1'
 
-function Exam() {
-    const [radVal, setRadVal] = useState('')
-    const [score, setScore] = useState(0)
+// interface Arrtype {
+//   radVal: string[],
+//   score: number
+// }
 
-    function checker(e:any) {
+function Exam() {
+    // const [radVal, setRadVal] = useState([''])
+    const [radVal, setRadVal] = useState('')
+    const [score, setScore] = useState<number>(0)
+
+    function result(e:any) {
       e.preventDefault()
       for (let i = 0; i < test1.length; i++) {
         if (radVal === test1[i].correct) {
@@ -16,15 +22,9 @@ function Exam() {
         } else {
           alert('Wrong answer')
         }
-        console.log(score)
+        console.log(radVal)
+        console.log(test1[i].correct)
       }
-      // if (radVal === test1[0].correct) {
-      //   alert('Correct answer')
-      //   setScore(score + 1)
-      // } else {
-      //   alert('Wrong answer')
-      // }
-      // console.log(score)
     }
   return (
     <>
@@ -33,20 +33,20 @@ function Exam() {
             <Box w='10%'/>
             <Box w='80%' marginTop={10}>
             <FormControl>
-                <form onSubmit={checker}>
+                <form onSubmit={result}>
                         {test1.map((item, i) => (
                     <Stack mb={4}>
                         <Box borderWidth='2px' borderRadius='lg' mb={5}>
                             <Box p={1} fontStyle='italic' fontFamily='ultra' fontSize={20} color='lightblue'>Q{item.index}</Box>
                             <Box p={5}>
                                 <FormLabel>{item.question}</FormLabel>
-                                <RadioGroup onChange={setRadVal} value={radVal}>
-                                    <Stack direction='column' marginBottom={4}>
                                         {item.options.map((item) => (
-                                            <Radio value={item} name={item}>{item}</Radio>
-                                         ))} 
+                                <RadioGroup onChange={setRadVal}>
+                                    <Stack direction='column' marginBottom={4}>
+                                            <Radio value={item}>{item}</Radio>
                                     </Stack>
                                 </RadioGroup>
+                                         ))} 
                             </Box>
                         </Box>
                     </Stack>
