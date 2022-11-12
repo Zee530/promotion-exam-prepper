@@ -1,5 +1,7 @@
 import { Alert, Box, Button, FormControl, FormLabel, Radio, RadioGroup, Stack } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
+import { string } from 'yup'
+import { number } from 'yup/lib/locale'
 import Navbar from './Navbar'
 import test1 from './Test1'
 
@@ -9,56 +11,75 @@ import test1 from './Test1'
 // }
 
 function Exam() {
-    // const [radVal, setRadVal] = useState([''])
-    const [radVal, setRadVal] = useState('')
-    const [score, setScore] = useState<number>(0)
+    const [radVal, setRadVal] = useState<Array<string>>([])
+    const [score, setScore] = useState<Number>(0)
+    const [showScore, setShowScore] = useState<Boolean>(false)
+    const radRef = useRef<any>()
+    
+    const handleChange = (value: string) => {
+      setRadVal([...radVal, value])
+      // radRef.current.isDisabled = true
+    }
 
-    function result(e:any) {
-      e.preventDefault()
+    let newScore: any = []
+
+    function result() {
+      // e.preventDefault()
+      // setShowScore(true)
+      radRef.current.isDisabled = true
       if (radVal) {
           for (let i = 0; i < test1.length; i++) {
-            if (radVal === test1[i].correct) {
-              alert('Correct answer')
-              setScore(score + 1)
+            if (radVal[i] === test1[i].correct) {
+              // alert('Correct answer')
+              newScore.push(1)
             } else {
-              alert('Wrong answer')
+              // alert('Wrong answer')
             }
-            console.log(radVal)
-            console.log(test1[i].correct)
+            // console.log(test1[i].correct)
+            // console.log(radVal[i])
+            // console.log(score)
           }
       } else {
         alert('Select an option')
       }
+      console.log(newScore)
+      setScore(newScore.length)
+      console.log(score)
     }
+
   return (
     <>
         <Navbar />
         <Box display='flex'>   
             <Box w='10%'/>
             <Box w='80%' marginTop={10}>
-            <FormControl>
-                <form onSubmit={result}>
-                        {test1.map((item, i) => (
-                    <Stack mb={4}>
-                        <Box borderWidth='2px' borderRadius='lg' mb={5}>
-                            <Box p={1} fontStyle='italic' fontFamily='ultra' fontSize={20} color='lightblue'>Q{item.index}</Box>
-                            <Box p={5}>
-                                <FormLabel>{item.question}</FormLabel>
-                                        {item.options.map((item) => (
-                                <RadioGroup onChange={setRadVal}>
-                                    <Stack direction='column' marginBottom={4}>
-                                            <Radio value={item}>{item}</Radio>
-                                    </Stack>
-                                </RadioGroup>
-                                         ))} 
+              {showScore ? (
+                  `Congratulations, you scored ${score}/${test1.length}`
+              ) : (    
+                <FormControl>
+                    <form>
+                            {test1.map((item, i) => (
+                        <Stack mb={4}>
+                            <Box borderWidth='2px' borderRadius='lg' mb={5}>
+                                <Box p={1} fontStyle='italic' fontFamily='ultra' fontSize={20} color='lightblue'>Q{item.index}</Box>
+                                <Box p={5}>
+                                    <FormLabel>{item.question}</FormLabel>
+                                      <RadioGroup onChange={handleChange}>
+                                            {item.options.map((item) => (
+                                        <Stack direction='column' marginBottom={4}>
+                                                <Radio value={item} ref={radRef}>{item}</Radio>
+                                        </Stack>
+                                            ))} 
+                                      </RadioGroup>
+                                </Box>
                             </Box>
-                        </Box>
-                    </Stack>
-                        ))}
-                    <Button type='submit' color='white' variant='solid' bg='lightblue'>SUBMIT</Button>
-                    {/* {JSON.stringify(answer)} */}
-                </form>
-            </FormControl>
+                        </Stack>
+                            ))}
+                        <Button onClick={result} color='white' variant='solid' bg='lightblue'>SUBMIT</Button>
+                        {/* {JSON.stringify(answer)} */}
+                    </form>
+                </FormControl>
+              )}
     {/* <Formik
       initialValues={{
         picked: '',
