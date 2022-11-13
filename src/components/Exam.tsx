@@ -67,7 +67,7 @@ function Exam() {
                                       <RadioGroup onChange={handleChange}>
                                             {item.options.map((item) => (
                                         <Stack direction='column' marginBottom={4}>
-                                                <Radio value={item} ref={radRef}>{item}</Radio>
+                                            <Radio value={item} ref={radRef}>{item}</Radio>
                                         </Stack>
                                             ))} 
                                       </RadioGroup>
