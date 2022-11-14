@@ -24,6 +24,7 @@ function Exam() {
     }
 
     let newScore: any = []
+    let randomIndex = Math.floor(Math.random() * 17)
 
     function result() {
       // e.preventDefault()
@@ -79,7 +80,7 @@ function Exam() {
               ) : (    
                 <FormControl>
                     <form>
-                            {test1.map((item, i) => (
+                            {test1.slice(0,20).map((item, i) => (
                         <Stack mb={4}>
                             <Box borderWidth='2px' borderRadius='lg' mb={5}>
                                 <Box p={1} fontStyle='italic' fontFamily='ultra' fontSize={20} color='lightblue'>Q{item.index}</Box>
