@@ -1,5 +1,6 @@
-import { Alert, Box, Button, FormControl, FormLabel, Radio, RadioGroup, Stack } from '@chakra-ui/react'
+import { Alert, Box, Button, Center, FormControl, FormLabel, Radio, RadioGroup, Stack, Tooltip } from '@chakra-ui/react'
 import React, { useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { string } from 'yup'
 import { number } from 'yup/lib/locale'
 import Navbar from './Navbar'
@@ -11,8 +12,9 @@ import test1 from './Test1'
 // }
 
 function Exam() {
+    let navigate = useNavigate()
     const [radVal, setRadVal] = useState<Array<string>>([])
-    const [score, setScore] = useState<Number>(0)
+    const [score, setScore] = useState(0)
     const [showScore, setShowScore] = useState<Boolean>(false)
     const radRef = useRef<any>()
     
@@ -25,8 +27,8 @@ function Exam() {
 
     function result() {
       // e.preventDefault()
-      // setShowScore(true)
-      radRef.current.isDisabled = true
+      setShowScore(true)
+      // radRef.current.isDisabled = true
       if (radVal) {
           for (let i = 0; i < test1.length; i++) {
             if (radVal[i] === test1[i].correct) {
@@ -42,9 +44,13 @@ function Exam() {
       } else {
         alert('Select an option')
       }
-      console.log(newScore)
+      // console.log(newScore)
       setScore(newScore.length)
       console.log(score)
+    }
+
+    function retry() {
+      window.location.reload()
     }
 
   return (
@@ -54,7 +60,22 @@ function Exam() {
             <Box w='10%'/>
             <Box w='80%' marginTop={10}>
               {showScore ? (
-                  `Congratulations, you scored ${score}/${test1.length}`
+                <Center>
+                <Box borderWidth='2px' borderRadius='lg' w='100%'>
+                  <Box p={1} fontStyle='italic' fontFamily='ultra' fontSize={20} color='lightblue'>
+                    <Center><Box p={5}>Exam Completed</Box></Center>
+                    <Center><Box p={5}>You scored {score} out of {test1.length}</Box></Center>
+                  </Box>
+                  <Box display='flex' mb={8} mt={5}>
+                    <Box w='25%'/>
+                    <Box w='50%'>
+                      <Button onClick={retry} color='white' width={180} variant='solid' bg='lightblue' float='left'>RETRY</Button>
+                      <Tooltip hasArrow label='Coming Soon'><Button color='white' width={180} variant='solid' bg='lightblue' float='right'>REVIEW</Button></Tooltip>
+                    </Box>
+                    <Box w='25%'/>
+                  </Box>
+                </Box>
+                </Center>
               ) : (    
                 <FormControl>
                     <form>
@@ -75,39 +96,11 @@ function Exam() {
                             </Box>
                         </Stack>
                             ))}
-                        <Button onClick={result} color='white' variant='solid' bg='lightblue'>SUBMIT</Button>
+                        <Center><Button onClick={result} mb={5} width={180} color='white' variant='solid' bg='lightblue'>SUBMIT</Button></Center>
                         {/* {JSON.stringify(answer)} */}
                     </form>
                 </FormControl>
               )}
-    {/* <Formik
-      initialValues={{
-        picked: '',
-      }}
-      onSubmit={async (values) => {
-        await new Promise((r) => setTimeout(r, 500));
-        alert(JSON.stringify(values, null, 2));
-      }}
-    >
-      {({ values }) => (
-        <Form>
-          <div id="my-radio-group">Picked</div>
-          <div role="group" aria-labelledby="my-radio-group">
-            <label>
-              <Field type="radio" name="picked" value="One" />
-              One
-            </label>
-            <label>
-              <Field type="radio" name="picked" value="Two" />
-              Two
-            </label>
-            <div>Picked: {values.picked}</div>
-          </div>
-
-          <button type="submit">Submit</button>
-        </Form>
-      )}
-    </Formik> */}
             </Box>
             <Box w='10%'/>
         </Box>
