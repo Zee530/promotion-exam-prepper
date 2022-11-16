@@ -1,5 +1,5 @@
 import { Alert, Box, Button, Center, FormControl, FormLabel, Radio, RadioGroup, Stack, Tooltip } from '@chakra-ui/react'
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { string } from 'yup'
 import { number } from 'yup/lib/locale'
@@ -17,14 +17,28 @@ function Exam() {
     const [score, setScore] = useState(0)
     const [showScore, setShowScore] = useState<Boolean>(false)
     const radRef = useRef<any>()
+
+    
     
     const handleChange = (value: string) => {
       setRadVal([...radVal, value])
       // radRef.current.isDisabled = true
     }
-
+    
     let newScore: any = []
-    let randomIndex = Math.floor(Math.random() * 17)
+    // let old = ['1','2','3','4','5']
+    
+    function shuffleArray(arr:any) {
+      arr.sort(() => Math.random() - 0.5);
+    }
+    // let arr = [1, 2, 3, 4, 5];
+    
+    useEffect(() => {
+      shuffleArray(test1)
+      console.log(test1)
+      // result()
+      // console.log('sideeffect')
+    },[])
 
     function result() {
       // e.preventDefault()
@@ -39,19 +53,20 @@ function Exam() {
               // alert('Wrong answer')
             }
             // console.log(test1[i].correct)
-            // console.log(radVal[i])
-            // console.log(score)
+            console.log(radVal[i])
+            console.log(test1[i].correct)
           }
       } else {
         alert('Select an option')
       }
       // console.log(newScore)
       setScore(newScore.length)
-      console.log(score)
     }
 
     function retry() {
       window.location.reload()
+      // shuffleArray(test1)
+      // setShowScore(false)
     }
 
   return (
@@ -80,10 +95,10 @@ function Exam() {
               ) : (    
                 <FormControl>
                     <form>
-                            {test1.slice(0,20).map((item, i) => (
+                            {test1.map((item, index) => (
                         <Stack mb={4}>
                             <Box borderWidth='2px' borderRadius='lg' mb={5}>
-                                <Box p={1} fontStyle='italic' fontFamily='ultra' fontSize={20} color='lightblue'>Q{item.index}</Box>
+                                <Box p={1} fontStyle='italic' fontFamily='ultra' fontSize={20} color='lightblue'>Q{index+1}</Box>
                                 <Box p={5}>
                                     <FormLabel>{item.question}</FormLabel>
                                       <RadioGroup onChange={handleChange}>
