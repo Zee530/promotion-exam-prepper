@@ -16,6 +16,7 @@ function Exam() {
     const [radVal, setRadVal] = useState<Array<string>>([])
     const [score, setScore] = useState(0)
     const [showScore, setShowScore] = useState<Boolean>(false)
+    const [begin, setBegin] = useState<Boolean>(true)
     const radRef = useRef<any>()
 
     
@@ -26,19 +27,20 @@ function Exam() {
     }
     
     let newScore: any = []
+    let newExam:any = []
     // let old = ['1','2','3','4','5']
     
-    function shuffleArray(arr:any) {
-      arr.sort(() => Math.random() - 0.5);
-    }
+    // function shuffleArray(arr:any) {
+    //   arr.sort(() => Math.random() - 0.5);
+    // }
     // let arr = [1, 2, 3, 4, 5];
     
-    useEffect(() => {
-      shuffleArray(test1)
-      console.log(test1)
-      // result()
-      // console.log('sideeffect')
-    },[])
+    // useEffect(() => {
+    //   newExam = shuffleArray(test1)
+    //   console.log(test1)
+    //   // result()
+    //   // console.log('sideeffect')
+    // }, [])
 
     function result() {
       // e.preventDefault()
@@ -75,12 +77,15 @@ function Exam() {
         <Box display='flex'>   
             <Box w='10%'/>
             <Box w='80%' marginTop={10}>
+              {/* {begin ? (
+                <Button onClick() => {setBegin(false)}>START THE EXAM</Button>
+              ) : ( */}
               {showScore ? (
                 <Center>
                 <Box borderWidth='2px' borderRadius='lg' w='100%'>
                   <Box p={1} fontStyle='italic' fontFamily='ultra' fontSize={20} color='lightblue'>
                     <Center><Box p={5}>Exam Completed</Box></Center>
-                    <Center><Box p={5}>You scored {score} out of {test1.length}</Box></Center>
+                    <Center><Box p={5}>You scored {score} out of 20</Box></Center>
                   </Box>
                   <Box display='flex' mb={8} mt={5}>
                     <Box w='25%'/>
@@ -95,7 +100,7 @@ function Exam() {
               ) : (    
                 <FormControl>
                     <form>
-                            {test1.map((item, index) => (
+                            {test1.slice(0,20).map((item, index) => (
                         <Stack mb={4}>
                             <Box borderWidth='2px' borderRadius='lg' mb={5}>
                                 <Box p={1} fontStyle='italic' fontFamily='ultra' fontSize={20} color='lightblue'>Q{index+1}</Box>
@@ -117,6 +122,7 @@ function Exam() {
                     </form>
                 </FormControl>
               )}
+              {/* )} */}
             </Box>
             <Box w='10%'/>
         </Box>
