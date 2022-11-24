@@ -58,12 +58,12 @@ function Landing() {
     
 
   return (
-    <Box display='flex'>
-        <Box w='60%'>
+    <Box display={['block', 'block', 'flex']}>
+        <Box w={['100%', '100%','60%']} display={['none', 'none','flex']}>
             <Image src={logo} alt='main' height='120vh'/>
         </Box>
-        <Box w='40%' bg='lightblue'>
-           <Center mt={4} mb={4} fontFamily='ultra' color='white' fontSize={28}>
+        <Box w={['100%', '100%', '40%']} bg='lightblue' height='120vh'>
+           <Center p={4} mb={4} fontFamily='ultra' color='white' fontSize={{base:'20px', sm:'20px', md:'28px'}} textAlign='center'>
                 PROMOTION EXAM PREPPER
             </Center>
             <Center>

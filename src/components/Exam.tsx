@@ -73,7 +73,7 @@ function Exam() {
 
   return (
     <>
-        <Navbar />
+        <Navbar/>
         <Box display='flex'>   
             <Box w='10%'/>
             <Box w='80%' marginTop={10}>
@@ -85,15 +85,17 @@ function Exam() {
                 <Box borderWidth='2px' borderRadius='lg' w='100%'>
                   <Box p={1} fontStyle='italic' fontFamily='ultra' fontSize={20} color='lightblue'>
                     <Center><Box p={5}>Exam Completed</Box></Center>
-                    <Center><Box p={5}>You scored {score} out of 20</Box></Center>
+                    <Center><Box p={5} textAlign='center'>You scored {score} / 20</Box></Center>
                   </Box>
-                  <Box display='flex' mb={8} mt={5}>
-                    <Box w='25%'/>
-                    <Box w='50%'>
+                  <Box display={['block', 'block', 'flex']} mb={8} mt={5}>
+                    <Box w='25%' display={['none','none','block']}/>
+                    <Box w={['100%','100%','50%']}>
+                      <Center>
                       <Button onClick={retry} color='white' width={180} variant='solid' bg='lightblue' float='left'>RETRY</Button>
-                      <Tooltip hasArrow label='Coming Soon'><Button color='white' width={180} variant='solid' bg='lightblue' float='right'>REVIEW</Button></Tooltip>
+                      {/* <Tooltip hasArrow label='Coming Soon'><Button color='white' width={180} variant='solid' bg='lightblue' float='right'>REVIEW</Button></Tooltip> */}
+                      </Center>
                     </Box>
-                    <Box w='25%'/>
+                    <Box w='25%' display={['none','none','block']}/>
                   </Box>
                 </Box>
                 </Center>
