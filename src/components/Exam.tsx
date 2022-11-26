@@ -12,12 +12,12 @@ import test1 from './Test1'
 // }
 
 function Exam() {
-    let navigate = useNavigate()
+    // let navigate = useNavigate()
     const [radVal, setRadVal] = useState<Array<string>>([])
     const [score, setScore] = useState(0)
     const [showScore, setShowScore] = useState<Boolean>(false)
-    const [begin, setBegin] = useState<Boolean>(true)
-    const radRef = useRef<any>()
+    // const [begin, setBegin] = useState<Boolean>(true)
+    let scoreMessage = useRef<any>()
 
     
     
@@ -27,7 +27,7 @@ function Exam() {
     }
     
     let newScore: any = []
-    let newExam:any = []
+    // let newExam:any = []
     // let old = ['1','2','3','4','5']
     
     // function shuffleArray(arr:any) {
@@ -55,8 +55,8 @@ function Exam() {
               // alert('Wrong answer')
             }
             // console.log(test1[i].correct)
-            console.log(radVal[i])
-            console.log(test1[i].correct)
+            // console.log(radVal[i])
+            // console.log(test1[i].correct)
           }
       } else {
         alert('Select an option')
@@ -84,8 +84,18 @@ function Exam() {
                 <Center>
                 <Box borderWidth='2px' borderRadius='lg' w='100%'>
                   <Box p={1} fontStyle='italic' fontFamily='ultra' fontSize={20} color='lightblue'>
-                    <Center><Box p={5}>Exam Completed</Box></Center>
-                    <Center><Box p={5} textAlign='center'>You scored {score} / 20</Box></Center>
+                    {score >= 10 ? (
+                      <Center display='block' textAlign='center'>
+                      <Center p={3}>Well done, {sessionStorage.getItem('Firstname')}</Center>
+                      <Center p={3} textAlign='center'>You scored {score} / 20</Center>
+                      <Center p={3}>You have been promoted to {sessionStorage.getItem('Rank')}</Center>
+                    </Center>
+                    ) : (
+                      <Center display='block' textAlign='center'>
+                        <Center p={3}>Well done, {sessionStorage.getItem('Firstname')}</Center>
+                        <Center p={3} textAlign='center'>You scored {score} / 20</Center>
+                      </Center>
+                    )}
                   </Box>
                   <Box display={['block', 'block', 'flex']} mb={8} mt={5}>
                     <Box w='25%' display={['none','none','block']}/>
@@ -99,30 +109,35 @@ function Exam() {
                   </Box>
                 </Box>
                 </Center>
-              ) : (    
-                <FormControl>
-                    <form>
-                            {test1.slice(0,20).map((item, index) => (
-                        <Stack mb={4}>
-                            <Box borderWidth='2px' borderRadius='lg' mb={5}>
-                                <Box p={1} fontStyle='italic' fontFamily='ultra' fontSize={20} color='lightblue'>Q{index+1}</Box>
-                                <Box p={5}>
-                                    <FormLabel>{item.question}</FormLabel>
-                                      <RadioGroup onChange={handleChange}>
-                                            {item.options.map((item) => (
-                                        <Stack direction='column' marginBottom={4}>
-                                            <Radio value={item} ref={radRef}>{item}</Radio>
-                                        </Stack>
-                                            ))} 
-                                      </RadioGroup>
-                                </Box>
-                            </Box>
-                        </Stack>
-                            ))}
-                        <Center><Button onClick={result} mb={5} width={180} color='white' variant='solid' bg='lightblue'>SUBMIT</Button></Center>
-                        {/* {JSON.stringify(answer)} */}
-                    </form>
-                </FormControl>
+              ) : (   
+                <Box>
+                    <Box mb={3} fontStyle='italic' fontFamily='cursive' fontSize={20} color='lightblue' float='right'>
+                      Goodluck, {sessionStorage.getItem('Firstname')}
+                    </Box>
+                  <FormControl float='left'>
+                      <form>
+                              {test1.slice(0,20).map((item, index) => (
+                          <Stack mb={4}>
+                              <Box borderWidth='2px' borderRadius='lg' mb={5}>
+                                  <Box p={1} fontStyle='italic' fontFamily='ultra' fontSize={20} color='lightblue'>Q{index+1}</Box>
+                                  <Box p={5}>
+                                      <FormLabel>{item.question}</FormLabel>
+                                        <RadioGroup onChange={handleChange}>
+                                              {item.options.map((item) => (
+                                          <Stack direction='column' marginBottom={4}>
+                                              <Radio value={item}>{item}</Radio>
+                                          </Stack>
+                                              ))} 
+                                        </RadioGroup>
+                                  </Box>
+                              </Box>
+                          </Stack>
+                              ))}
+                          <Center><Button onClick={result} mb={5} width={180} color='white' variant='solid' bg='lightblue'>SUBMIT</Button></Center>
+                          {/* {JSON.stringify(answer)} */}
+                      </form>
+                  </FormControl>
+                </Box> 
               )}
               {/* )} */}
             </Box>

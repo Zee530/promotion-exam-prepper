@@ -54,8 +54,8 @@ function Navbar() {
           </DrawerContent>
         </Drawer>
       </Box>
-      <Box w={['0%','0%','20%']} display={['none','none','flex']}>
-        <List display='flex' justifyContent='flex-end'>
+      <Box w={['0%','0%','20%']} display={['none','none','flex']} p={0}>
+        <List display='flex'>
           <Link as={router} to='/'><Tooltip  hasArrow label='Home'><ListItem><Button bg='inherit'><Img src={home} alt='github' boxSize={8}/></Button></ListItem></Tooltip></Link>
           {/* <Tooltip hasArrow label='About Us'><ListItem><Button bg='inherit'><Img src={info} alt='github' boxSize={8}/></Button></ListItem></Tooltip> */}
           <Link href='https://github.com/Zee530/promotion-exam-prepper' isExternal><Tooltip hasArrow label='Project'><ListItem><Button bg='inherit'><Img src={github} alt='github' boxSize={8}/></Button></ListItem></Tooltip></Link>

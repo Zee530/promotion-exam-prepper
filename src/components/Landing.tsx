@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom'
 
 function Landing() {
     let navigate = useNavigate()
+    const phoneRegExp = /[0-9]{10}/
     const register = useFormik({
         initialValues: {
             staffid: '',
@@ -31,18 +32,25 @@ function Landing() {
                 .oneOf(['aprd','audit','claims','corporate','enforcement','finance','admin',
                         'hse','ict','informal','inspection','legal','servicom'])
                 .required('Required'),
-            rank: Yup.number()
-                .oneOf([0,1,2,3,4,5,6,7,8,9])
+            rank: Yup.string()
+                .oneOf(['Officer 1','Assistant Manager','Deputy Manager','Manager','Senior Manager',
+                'Principal Manager','Assistant General Manager','Deputy General Manager','General Manager','MD/CEO'])
                 .required('Required'),
-            phone: Yup.string()
-                .min(10, 'Enter a valid phone number')
-                .max(10, 'Enter a valid phone number')
+            phone: Yup.string().matches(phoneRegExp, 'Enter a valid phone number')
+                .min(10, 'must be 10 digits')
+                .max(10, 'must be 10 digits')
                 .required('Required')
         }),
         onSubmit: values => {
         //   alert(JSON.stringify(values, null, 2));
-        console.log(values)
+        // console.log(values)
         navigate('exam')
+        sessionStorage.setItem('Staff ID', values.staffid)
+        sessionStorage.setItem('Firstname', values.firstName)
+        sessionStorage.setItem('Lastname', values.lastName)
+        sessionStorage.setItem('Department', values.department)
+        sessionStorage.setItem('Rank', values.rank)
+        sessionStorage.setItem('Phone', values.phone)
         },
       });
 
@@ -113,16 +121,16 @@ function Landing() {
 
                     <FormLabel color='white'>Rank</FormLabel>
                     <Select id='rank' placeholder='Select option' bg='white' {...register.getFieldProps('rank')}>
-                        <option value={9}>General Manager</option>
-                        <option value={8}>Deputy General Manager</option>
-                        <option value={7}>Assistant General Manager</option>
-                        <option value={6}>Principal Manager</option>
-                        <option value={5}>Senior Manager</option>
-                        <option value={4}>Manager</option>
-                        <option value={3}>Deputy Manager</option>
-                        <option value={2}>Assistant Manager</option>
-                        <option value={1}>Officer 1</option>
-                        <option value={0}>Officer 2</option>
+                        <option value='MD/CEO'>General Manager</option>
+                        <option value='General Manager'>Deputy General Manager</option>
+                        <option value='Deputy General Manager'>Assistant General Manager</option>
+                        <option value='Assistant General Manager'>Principal Manager</option>
+                        <option value='Principal Manager'>Senior Manager</option>
+                        <option value='Senior Manager'>Manager</option>
+                        <option value='Manager'>Deputy Manager</option>
+                        <option value='Deputy Manager'>Assistant Manager</option>
+                        <option value='Assistant Manager'>Officer 1</option>
+                        <option value='Officer 1'>Officer 2</option>
                     </Select>
                     {register.touched.rank && register.errors.rank ? (
                             <Box color='red' fontStyle='italic' fontSize={12}>{register.errors.rank}</Box>
